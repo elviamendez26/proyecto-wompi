@@ -11,7 +11,6 @@
                             <mat-select formControlName="tipo">
                                 <mat-option value="CC">CEDULA</mat-option>
                                 <mat-option value="NIT">NIT</mat-option>
-                                <mat-option value="OTRO">OTRO</mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field appearance="fill">
@@ -76,7 +75,7 @@
                                 {{dato.fechaVencimiento}}
                             </td>
                             <td class="py-4 px-6">
-                                ${{dato.valorFactura | number}}
+                                ${{dato.valorFactura | number}}}
                             </td>
 
                         </tr>
@@ -95,8 +94,9 @@
                     Elegir Metodo de pago
                 </mat-card-title>
                 <mat-card-subtitle>
-
-                    {{formularioPagos.value.tipo}} {{formularioPagos.value.numeroDoc}}
+                    {{TipoIdentificacion}} {{identificacion}}
+                    <br>
+                    <strong>{{nombreCliente}}</strong>
                 </mat-card-subtitle>
 
                 <mat-radio-group aria-label="Select an option" [(ngModel)]="metodoPago">
@@ -118,4 +118,4 @@
 
 
 </div>
-<iframe width="100%" height="100%"  *ngIf="mostrarpago==false" frameBorder="0"  src="assets/wompi.html/?numeroFactura=222144&valorFactura=580755"></iframe>
+<iframe width="100%" height="100%"  *ngIf="mostrarpago==false" frameBorder="0"  [src]="safeSrc" ></iframe>

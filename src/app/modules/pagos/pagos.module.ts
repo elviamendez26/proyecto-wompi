@@ -12,7 +12,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
+import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
 
 
@@ -36,6 +36,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatButtonModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [GridPagosComponent]
