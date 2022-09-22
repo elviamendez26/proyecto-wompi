@@ -39,7 +39,7 @@
             var checkout = new WidgetCheckout({
                 currency: 'COP',
                 amountInCents: (parseFloat(data.valorFactura) * 100) + (1138 * 100), //cobro definido
-                reference: data.numeroFactura + moment().format("DDMMYYYYHHmmss"),
+                reference: data.numeroFactura,
                 publicKey: 'pub_test_ySV5X2nF1TOpkiPqVkFTkthoFnTkR0eW',
                 //   publicKey: 'pub_test_ySV5X2nF1TOpkiPqVkFTkthoFnTkR0eW',
             })
