@@ -1,79 +1,121 @@
-<div class="h-56 h-full h-screen grid grid-cols-1 sm:grid-cols-5 gap-4 content-center">
-    <div class="col-start-2 col-span-3" *ngIf="datoPagar.length==0">
-        <mat-card>
-            <mat-card-title>Paga tu cupo personal</mat-card-title>
-            <mat-card-subtitle>Ingresa el número de identificación del TITULAR.</mat-card-subtitle>
-            <form novalidate [formGroup]="formularioPagos">
-                <div class="pago-container">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Tipo de documento</mat-label>
-                        <mat-select formControlName="tipo">
-                            <mat-option value="CC">CEDULA</mat-option>
-                            <mat-option value="NIT">NIT</mat-option>
-                            <mat-option value="OTRO">OTRO</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="fill">
-                        <mat-label>Número de documento</mat-label>
-                        <input matInput #input formControlName="numeroDoc" maxlength="10" minlength="5" placeholder=""
-                            autocomplete="off">
-                    </mat-form-field>
-                </div>
+<div class="h-56 h-full h-screen grid grid-cols-1 sm:grid-cols-5 gap-4 content-center" *ngIf="mostrarpago==true">
+    <ng-container [ngSwitch]="paso">
+        <div class="col-start-2 col-span-3" *ngSwitchCase="1">
+            <mat-card>
+                <mat-card-title>Paga tu cupo personal</mat-card-title>
+                <mat-card-subtitle>Ingresa el número de identificación del TITULAR.</mat-card-subtitle>
+                <form novalidate [formGroup]="formularioPagos">
+                    <div class="pago-container">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Tipo de documento</mat-label>
+                            <mat-select formControlName="tipo">
+                                <mat-option value="CC">CEDULA</mat-option>
+                                <mat-option value="NIT">NIT</mat-option>
+                                <mat-option value="OTRO">OTRO</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Número de documento</mat-label>
+                            <input matInput #input formControlName="numeroDoc" maxlength="10" minlength="5"
+                                placeholder="" autocomplete="off">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-card-actions class="mt-3 text-end">
+                        <button [disabled]="formularioPagos.invalid" mat-stroked-button color="primary"
+                            (click)="enviarDatos()">Buscar</button>
+                    </mat-card-actions>
+                </form>
+            </mat-card>
+        </div>
+        <div class="col-start-2 col-span-3" *ngSwitchCase="2">
+            <mat-card class="sinSombra">
+                <mat-card-title> <button mat-button class="segundario" (click)="paso=1">Volver</button> Resultado
+                    de
+                    la busqueda</mat-card-title>
+                <mat-card-subtitle>
+
+                    {{formularioPagos.value.tipo}} {{formularioPagos.value.numeroDoc}}
+                </mat-card-subtitle>
+                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="py-3 px-6">
+
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Nombre
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Valor Factura
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Fecha Vencimiento
+                            </th>
+                            <th scope="col" class="py-3 px-6">
+                                Pagar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                            *ngFor="let dato of datoPagar">
+                            <td scope="row"
+                                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <mat-checkbox class="example-margin" (change)="almacenarDato(dato,$event)"
+                                    [(ngModel)]="dato.checked"></mat-checkbox>
+                            </td>
+                            <th scope="row"
+                                class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{dato.nombreCliente}}
+                            </th>
+                            <td class="py-4 px-6">
+                                {{dato.valorFactura}}
+                            </td>
+                            <td class="py-4 px-6">
+                                {{dato.fechaVencimiento}}
+                            </td>
+                            <td class="py-4 px-6">
+                                ${{dato.valorFactura | number}}
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
 
                 <mat-card-actions class="mt-3 text-end">
-                    <button  [disabled]="formularioPagos.invalid" mat-stroked-button color="primary" (click)="enviarDatos()">Buscar</button>
+                    <button [disabled]="details.length<0" mat-stroked-button color="primary"
+                        (click)="referenciaPago()">Buscar</button>
                 </mat-card-actions>
-            </form>
-        </mat-card>
-    </div>
-    <div class="col-start-2 col-span-3" *ngIf="datoPagar.length!=0">
-        <mat-card class="sinSombra">
-            <mat-card-title> <button mat-button class="segundario" (click)="datoPagar=[]">Volver</button> Resultado de la busqueda</mat-card-title>
-            <mat-card-subtitle>
-               
-                {{formularioPagos.value.tipo}} {{formularioPagos.value.numeroDoc}}
-            </mat-card-subtitle>
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="py-3 px-6">
-                            
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Nombre
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Valor Factura
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Fecha Vencimiento
-                        </th>
-                        <th scope="col" class="py-3 px-6">
-                            Pagar
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let dato of datoPagar">
-                        <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <mat-checkbox class="example-margin" [(ngModel)]="dato.checked"></mat-checkbox>
-                        </td>
-                        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{dato.nombreCliente}}
-                        </th>
-                        <td class="py-4 px-6">
-                            {{dato.valorFactura}}
-                        </td>
-                        <td class="py-4 px-6">
-                            {{dato.fechaVencimiento}}
-                        </td>
-                        <td class="py-4 px-6">
-                            ${{dato.valorFactura | number}}}
-                        </td>
-                        
-                    </tr>
-                </tbody>
-            </table>
-        </mat-card>
-    </div>
+            </mat-card>
+        </div>
+        <div class="col-start-2 col-span-3" *ngSwitchCase="3">
+            <mat-card>
+                <mat-card-title> <button mat-button class="segundario" (click)="paso=2">Volver</button>
+                    Elegir Metodo de pago
+                </mat-card-title>
+                <mat-card-subtitle>
+
+                    {{formularioPagos.value.tipo}} {{formularioPagos.value.numeroDoc}}
+                </mat-card-subtitle>
+
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="metodoPago">
+                    <mat-radio-button  *ngFor="let item of configuracionPasarela" [value]="item.codigo">
+                        <img src="assets/{{item.entidad}}.png" [alt]="item.entidad">
+                    </mat-radio-button>
+                </mat-radio-group>
+
+                <mat-card-actions class="mt-3 text-end">
+                    <button [disabled]="formularioPagos.invalid" mat-stroked-button color="primary"
+                        (click)="pagar()">Pagar</button>
+                </mat-card-actions>
+            </mat-card>
+
+            <!-- <ng-include src="'https://trellat.es/cargar-una-pagina-dentro-de-otra-con-angular/'" *ngIf="mostrarPago=='wompi'"></ng-include> -->
+        </div>
+        
+    </ng-container>
+
+
 </div>
+<iframe width="100%" height="100%"  *ngIf="mostrarpago==false" frameBorder="0"  src="assets/wompi.html/?numeroFactura=222144&valorFactura=580755"></iframe>

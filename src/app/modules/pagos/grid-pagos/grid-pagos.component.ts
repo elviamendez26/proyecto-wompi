@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'app/core/services/auth.service';
 import { FintraBuscadoService } from 'app/core/services/fintraBuscado.service';
 import Swal from 'sweetalert2';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-grid-pagos',
@@ -12,23 +14,41 @@ export class GridPagosComponent implements OnInit {
 
   formularioPagos: FormGroup;
   datoPagar: any[] = [];
+  details: any[] = [];
+  paso: number = 1;
+  configuracionPasarela: any
+  dataReferencia: any;
+  metodoPago: number;
+  mostrarpago: boolean = true;
+  ruta: string;
   constructor(
     public _fintraBuscadoService: FintraBuscadoService,
+    private _authService: AuthService,
     public fb: FormBuilder
   ) {
     this.formularioPagos = this.fb.group({
-      tipo: ['',[Validators.required]],
-      numeroDoc:['901217835', [Validators.required, Validators.minLength(5)]],
+      tipo: ['', [Validators.required]],
+      numeroDoc: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
   ngOnInit(): void {
-
+    this.inicioSecion();
   }
+  inicioSecion() {
+    Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
+    this._authService.postSession().subscribe((res) => {
+      console.log(res)
+      Swal.close();
+    });
+  }
+
   configuracion() {
     Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
     this._fintraBuscadoService.configuracionPasarela().subscribe((res) => {
       console.log(res.data)
+      this.configuracionPasarela = res.data;
+      this.paso = 3;
       Swal.close();
     });
   }
@@ -38,7 +58,7 @@ export class GridPagosComponent implements OnInit {
     let data = this.formularioPagos.value
     Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
     this._fintraBuscadoService.getData(data.numeroDoc).subscribe((res) => {
-
+      this.paso = 2;
       res.data.forEach((data: any, index) => {
 
         this.datoPagar.push({ ...data, check: false })
@@ -47,8 +67,59 @@ export class GridPagosComponent implements OnInit {
     });
   }
 
-  pagarWompy(dato: any) {
-    
+  referenciaPago() {
+    if (this.details.length > 0) {
+      let data = {
+        "numeroSolicitud": 213957,
+        "identificacion": "901217835",
+        "details": this.details
+      }
+      Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
+      this._fintraBuscadoService.referenciaPago(data).subscribe((res) => {
+        console.log(res.data)
+        this.dataReferencia = res.data;
+        this.configuracion();
+
+        Swal.close();
+      });
+    }
   }
+  almacenarDato(dato, evento) {
+    //   console.log(evento)
+    if (evento.checked) {
+      this.details.push({
+        documentoCxc: dato.documentoCxC
+      }
+      )
+    } else {
+      let array = this.details.filter(word => word.documentoCxc == dato.documentoCxC);
+      let index = this.details.indexOf(array[0])
+      this.details.splice(index, 1)
+    }
+
+  }
+
+  pagar() {
+    switch (this.metodoPago) {
+      case 1:
+        // this.mostrarPago='wompi';
+        this.mostrarpago = false;
+        this.ruta = `assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`
+        debugger
+        break;
+
+      default:
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: '¡Este metodo aun no se ha configurado!',
+        })
+        break;
+    }
+  }
+
+
+
+
 
 }

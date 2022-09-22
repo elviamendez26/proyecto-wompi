@@ -13,6 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -33,7 +34,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [GridPagosComponent]

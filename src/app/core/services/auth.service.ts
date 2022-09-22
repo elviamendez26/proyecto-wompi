@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { map, of } from 'rxjs';
 import { AppSettingsService } from '../app-configs/app-settings.service';
 import { UtilityService } from './utility.service';
@@ -17,10 +18,10 @@ export class AuthService {
     ) { }
 
 
-  postSession(user: string, pass: string) {
+  postSession() {
     let data = {
-      "userName": user,
-      "password": btoa(pass)
+      "userName": environment.userName,
+      "password": btoa(environment.password)
     }
     console.log(data)
     return this._utilityService.postQuery(this._appSettings.auth.url.base, data)
@@ -30,19 +31,19 @@ export class AuthService {
       }));
   }
 
-  inicioSesion(user: string, pass: string) {
-    let data = {
-      "userName": user,
-      "password": btoa(pass)
-    }
-    return this._utilityService.postQuery(this._appSettings.auth.url.inicio, data)
-      .pipe(map((res: any) => {
+  // inicioSesion(user: string, pass: string) {
+  //   let data = {
+  //     "userName": user,
+  //     "password": btoa(pass)
+  //   }
+  //   return this._utilityService.postQuery(this._appSettings.auth.url.inicio, data)
+  //     .pipe(map((res: any) => {
       
 
-        this.saveSession(res.data);
-        return true;
-      }));
-  }
+  //       this.saveSession(res.data);
+  //       return true;
+  //     }));
+  // }
 
 
 
