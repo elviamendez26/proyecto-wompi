@@ -65,6 +65,7 @@ export class GridPagosComponent implements OnInit {
     Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
     this._fintraBuscadoService.getData(data.numeroDoc).subscribe((res) => {
       this.paso = 2;
+      this.datoPagar=[];
       res.data.forEach((dato: any, index) => {
         this.datoPagar.push({ ...dato, check: false })
       })
