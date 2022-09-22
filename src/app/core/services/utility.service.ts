@@ -38,7 +38,7 @@ export class UtilityService {
   handleError = (err: any): Observable<HttpEvent<any>> => {
 
     let errorMessage = 'No hay respuesta, favor intente nuevamente';
-    // console.log("Algo se daño");
+    console.log("Algo se daño");
     let res: any = {};
     if (err.error instanceof ErrorEvent) {
       errorMessage = `Error: ${err.error.msg}`;
@@ -109,23 +109,6 @@ export class UtilityService {
     return throwError(errorMessage);
   };
 
-  getRouteForm(step: string): string {
-    switch (step) {
-      case '1':
-        return "general";
-      case '2':
-        return "personal";
-      case '3':
-        return "laboral";
-      case '4':
-        return "referencia";
-      case '5':
-        return "financiera";
-      case '6':
-        return "legales"
-      default:
-        return 'general'
-    }
-  }
+
 }
 

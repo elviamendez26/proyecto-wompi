@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
+  production: false,
   urlApi:'https://prometheus.fintra.co:8443/'
 };
