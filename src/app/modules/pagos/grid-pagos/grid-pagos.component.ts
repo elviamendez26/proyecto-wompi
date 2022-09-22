@@ -12,7 +12,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   styleUrls: ['./grid-pagos.component.scss']
 })
 export class GridPagosComponent implements OnInit {
-  public safeSrc: SafeResourceUrl;   
+  public safeSrc: SafeResourceUrl;
   formularioPagos: FormGroup;
   datoPagar: any[] = [];
   details: any[] = [];
@@ -26,11 +26,12 @@ export class GridPagosComponent implements OnInit {
   numeroSolicitud: any;
   nombreCliente: any;
   TipoIdentificacion: string;
+  sumTotal:number=0;
   constructor(
     public _fintraBuscadoService: FintraBuscadoService,
     private _authService: AuthService,
     public fb: FormBuilder,
-    private sanitizer:DomSanitizer
+    private sanitizer: DomSanitizer
   ) {
     this.formularioPagos = this.fb.group({
       tipo: ['', [Validators.required]],
@@ -65,14 +66,14 @@ export class GridPagosComponent implements OnInit {
     Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
     this._fintraBuscadoService.getData(data.numeroDoc).subscribe((res) => {
       this.paso = 2;
-      this.datoPagar=[];
+      this.datoPagar = [];
       res.data.forEach((dato: any, index) => {
         this.datoPagar.push({ ...dato, check: false })
       })
-      this.numeroSolicitud=this.datoPagar[0].numeroSolicitud;
-      this.identificacion=data.numeroDoc;
-      this.TipoIdentificacion=data.tipo=='CC'?'Cedula':'NIT';
-      this.nombreCliente=this.datoPagar[0].nombreCliente;
+      this.numeroSolicitud = this.datoPagar[0].numeroSolicitud;
+      this.identificacion = data.numeroDoc;
+      this.TipoIdentificacion = data.tipo == 'CC' ? 'Cedula' : 'NIT';
+      this.nombreCliente = this.datoPagar[0].nombreCliente;
 
       Swal.close();
     });
@@ -100,12 +101,14 @@ export class GridPagosComponent implements OnInit {
     if (evento.checked) {
       this.details.push({
         documentoCxc: dato.documentoCxC
-      }
-      )
+      })
+      this.sumTotal+=dato.valorFactura;
     } else {
       let array = this.details.filter(word => word.documentoCxc == dato.documentoCxC);
       let index = this.details.indexOf(array[0])
       this.details.splice(index, 1)
+      this.sumTotal-=dato.valorFactura;
+
     }
 
   }

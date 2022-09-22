@@ -84,7 +84,7 @@
 
                 <mat-card-actions class="mt-3 text-end">
                     <button [disabled]="details.length<0" mat-stroked-button color="primary"
-                        (click)="referenciaPago()">Pagar</button>
+                        (click)="referenciaPago()">Pagar <strong *ngIf="sumTotal>0">(${{sumTotal|number}})</strong></button>
                 </mat-card-actions>
             </mat-card>
         </div>
