@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FintraBuscadoService } from 'app/core/services/fintraBuscado.service';
 import Swal from 'sweetalert2';
 
@@ -17,8 +17,8 @@ export class GridPagosComponent implements OnInit {
     public fb: FormBuilder
   ) {
     this.formularioPagos = this.fb.group({
-      tipo: [''],
-      numeroDoc: ['901217835']
+      tipo: ['',[Validators.required]],
+      numeroDoc:['901217835', [Validators.required, Validators.minLength(5)]],
     });
   }
 

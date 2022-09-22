@@ -25,4 +25,10 @@ configuracionPasarela() {
       return res;
     }));
 }
+referenciaPago(data:any) {
+  return this._utilityService.postQuery(this._appSettings.fintraSeach.url.referenciaPago,data)
+    .pipe(map((res: any) => {
+      return res;
+    }));
+}
 }
