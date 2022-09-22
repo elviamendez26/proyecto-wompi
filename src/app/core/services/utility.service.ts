@@ -40,6 +40,7 @@ export class UtilityService {
     let errorMessage = 'No hay respuesta, favor intente nuevamente';
     console.log("Algo se daño");
     let res: any = {};
+    console.log(err.error)
     if (err.error instanceof ErrorEvent) {
       errorMessage = `Error: ${err.error.msg}`;
     } else {
