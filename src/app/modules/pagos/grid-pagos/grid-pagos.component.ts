@@ -23,6 +23,14 @@ export class GridPagosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+  }
+  configuracion() {
+    Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
+    this._fintraBuscadoService.configuracionPasarela().subscribe((res) => {
+      console.log(res.data)
+      Swal.close();
+    });
   }
 
 
@@ -39,12 +47,8 @@ export class GridPagosComponent implements OnInit {
     });
   }
 
-  pagarWompy(dato:any) {
-    Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
-    this._fintraBuscadoService.configuracionPasarela().subscribe((res) => {
-      console.log(res.data)
-      Swal.close();
-    });
+  pagarWompy(dato: any) {
+    
   }
 
 }
