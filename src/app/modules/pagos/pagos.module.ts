@@ -14,7 +14,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
-
+import {MatIconModule} from '@angular/material/icon';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -36,7 +37,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatButtonModule,
     MatCheckboxModule,
     MatRadioModule,
-    MatStepperModule
+    MatStepperModule,
+    MatIconModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [GridPagosComponent]

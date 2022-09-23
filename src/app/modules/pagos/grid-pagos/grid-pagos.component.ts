@@ -14,6 +14,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class GridPagosComponent implements OnInit {
   public safeSrc: SafeResourceUrl;
   formularioPagos: FormGroup;
+  formularioFactura: FormGroup;
   datoPagar: any[] = [];
   details: any[] = [];
   paso: number = 1;
@@ -27,6 +28,8 @@ export class GridPagosComponent implements OnInit {
   nombreCliente: any;
   TipoIdentificacion: string;
   sumTotal:number=0;
+panelOpenState = false;
+
   constructor(
     public _fintraBuscadoService: FintraBuscadoService,
     private _authService: AuthService,
@@ -35,7 +38,11 @@ export class GridPagosComponent implements OnInit {
   ) {
     this.formularioPagos = this.fb.group({
       tipo: ['', [Validators.required]],
-      numeroDoc: ['', [Validators.required, Validators.minLength(5)]],
+      numeroDoc: ['901217835', [Validators.required, Validators.minLength(5)]],
+    });
+    this.formularioFactura= this.fb.group({
+      total: [0, [Validators.required,Validators.min(1) ]],
+     
     });
   }
 
@@ -70,6 +77,8 @@ export class GridPagosComponent implements OnInit {
       res.data.forEach((dato: any, index) => {
         this.datoPagar.push({ ...dato, check: false })
       })
+      this.sumTotal=0;
+     
       this.numeroSolicitud = this.datoPagar[0].numeroSolicitud;
       this.identificacion = data.numeroDoc;
       this.TipoIdentificacion = data.tipo == 'CC' ? 'Cedula' : 'NIT';
@@ -90,6 +99,7 @@ export class GridPagosComponent implements OnInit {
       this._fintraBuscadoService.referenciaPago(data).subscribe((res) => {
         console.log(res.data)
         this.dataReferencia = res.data;
+        
         this.configuracion();
 
         Swal.close();
@@ -110,7 +120,10 @@ export class GridPagosComponent implements OnInit {
       this.sumTotal-=dato.valorFactura;
 
     }
-
+    // this.formularioFactura['total'].setValue(this.sumTotal)
+    this.formularioFactura.patchValue({
+      total: this.sumTotal
+    });
   }
 
   pagar() {
@@ -120,7 +133,6 @@ export class GridPagosComponent implements OnInit {
         this.mostrarpago = false;
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`);
         // this.ruta = `assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`
-        debugger
         break;
 
       default:
