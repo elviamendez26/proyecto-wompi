@@ -7,7 +7,7 @@ h2 {
   margin: 0 !important;
   padding: 0 !important;
 }
-@media (min-width: 640px) {
+@media (min-width: 912px) {
   h2 {
     font-size: 4em;
     text-align: start;
@@ -65,6 +65,13 @@ h2 {
   }
 }
 
+
+
+@media (min-width: 1500px) {
+  .izquierda{
+    margin-left: 21em;
+  }
+}
 
 
 .example-header-image {
