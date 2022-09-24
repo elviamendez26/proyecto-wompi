@@ -131,6 +131,7 @@ panelOpenState = false;
       case 1:
         // this.mostrarPago='wompi';
         this.mostrarpago = false;
+        this.dataReferencia.valorFactura=this.dataReferencia.valorFactura==0?5400000:this.dataReferencia.valorFactura;
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`);
         // this.ruta = `assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`
         break;

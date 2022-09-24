@@ -16,11 +16,13 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { EventoComponent } from './evento/evento.component';
 
 
 @NgModule({
   declarations: [
-    GridPagosComponent
+    GridPagosComponent,
+    EventoComponent
   ],
   imports: [
     CommonModule,

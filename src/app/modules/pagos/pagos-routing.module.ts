@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '',
     component: GridPagosComponent
   },
+  {
+    path: 'evento',
+    component: GridPagosComponent
+  },
 ];
 
 @NgModule({
