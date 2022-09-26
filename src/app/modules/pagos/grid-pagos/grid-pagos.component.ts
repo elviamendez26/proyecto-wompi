@@ -37,7 +37,7 @@ panelOpenState = false;
     private sanitizer: DomSanitizer
   ) {
     this.formularioPagos = this.fb.group({
-      tipo: ['', [Validators.required]],
+      tipo: ['CC', [Validators.required]],
       numeroDoc: ['901217835', [Validators.required, Validators.minLength(5)]],
     });
     this.formularioFactura= this.fb.group({

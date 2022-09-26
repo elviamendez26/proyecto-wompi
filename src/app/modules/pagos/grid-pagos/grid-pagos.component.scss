@@ -1,3 +1,11 @@
+.fondo-fintra {
+  background-color: #4bbbed;
+}
+
+.color-fintra {
+  color: #4bbbed;
+}
+
 h2 {
   font-size: 2em;
   text-align: center;
@@ -37,6 +45,19 @@ h2 {
   font-size: 14px;
   margin-bottom: 16px;
 }
+
+.sub-text {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.link{
+  color: #00c3fd;
+  text-decoration: underline;
+  cursor:pointer
+}
+
 .texto{
   margin-left: 3em;
   border-left: 1px solid #fea950;
