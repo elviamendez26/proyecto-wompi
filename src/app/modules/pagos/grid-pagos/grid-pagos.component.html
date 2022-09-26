@@ -1,5 +1,5 @@
-<div class="grid sm:grid-cols-2 grid-cols-1" *ngIf="mostrarpago==true">
-    <div class="izquierda">
+<div class="grid grid-cols-1" *ngIf="mostrarpago==true">
+    <div>
         <h2 class="">Pagar tu crédito</h2>
         <mat-stepper orientation="vertical" [linear]="true" #stepper>
             <mat-step [stepControl]="formularioPagos">
@@ -218,12 +218,6 @@
                 </div>
             </mat-step>
         </mat-stepper>
-    </div>
-
-    <div class="hiddenOculto  espacioImagenDerecha">
-        <img class="imagenDerecha bounce-top"
-            src="https://sala.uxper.co/wp-content/uploads/2021/10/business-person-launching-startup-3118490-2606130-0@2x.png"
-            alt="" srcset="">
     </div>
 </div>
 <iframe width="100%" height="100%" *ngIf="mostrarpago==false" frameBorder="0" [src]="safeSrc"></iframe>

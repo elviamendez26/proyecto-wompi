@@ -40,12 +40,15 @@
                 currency: 'COP',
                 amountInCents: (parseFloat(data.valorFactura) * 100) + (1138 * 100), //cobro definido
                 reference: data.numeroFactura,
-                publicKey: 'pub_test_ySV5X2nF1TOpkiPqVkFTkthoFnTkR0eW',
-                //   publicKey: 'pub_test_ySV5X2nF1TOpkiPqVkFTkthoFnTkR0eW',
+                // publicKey: 'pub_prod_cO09UJfaU2nPhm1WvcBb9MhFfIjdBv0y',
+                  publicKey: 'pub_test_ySV5X2nF1TOpkiPqVkFTkthoFnTkR0eW',
             })
 
             checkout.open(function (result) {
+                debugger;
                 var transaction = result.transaction
+                console.log(result)
+              
                 console.log('Transaction ID: ', transaction.id)
                 console.log('Transaction object: ', transaction)
             })
@@ -57,7 +60,6 @@
         //Accedemos a los valores
         var valorFactura = urlParams.get('valorFactura');
         var numeroFactura = urlParams.get('numeroFactura');
-        console.log(valorFactura)
         pagoWompi({ valorFactura: valorFactura, numeroFactura: numeroFactura })
     </script>
 </body>
