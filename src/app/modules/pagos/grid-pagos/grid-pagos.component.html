@@ -2,7 +2,7 @@
     <ng-container [ngSwitch]="paso">
         <div class="flex w-full justify-center px-10">
             <mat-card class="md:w-30" *ngSwitchCase="1">
-                <h2 class="color-fintra sinMargin">PAGUE SU FACTURA</h2>
+                <h2 class="color-fintra sinMargin">Pague su factura</h2>
                 <div class="mt-5">
                     <p class="subtitule">
                         Datos del titular
@@ -37,7 +37,7 @@
                 </form>
             </mat-card>
             <div class="px-10 mx-3 " *ngSwitchCase="2">
-                <h6 class="color-fintra mt-10">LISTADO DE FACTURA</h6>
+                <h6 class="color-fintra mt-10">Listado de factura</h6>
                 <div class="espacio-table">
                     <table class="shadow-2xl w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -58,7 +58,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                            <tr class="bg-white border-b"
                                 *ngFor="let dato of datoPagar">
                                 <td scope="row"
                                     class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -80,14 +80,14 @@
                         </tbody>
                     </table>
                 </div>
-                <h6 class="color-fintra mt-10">RESUMEN DE LA TRANSACCIÓN</h6>
+                <h6 class="color-fintra mt-10">Resumen de la transacción</h6>
                 <mat-card class="mx-3">
                     <div class="flex justify-center w-full flex-col justify-items-center text-center">
                         <div class="subtitule">Valor a pagar</div>
                         <h1 class="color-fintra"> <strong>${{sumTotal|number}}</strong></h1>
                     </div>
                 </mat-card>
-                <h6 class="color-fintra mt-10">SELECCIONE MEDIO DE PAGO</h6>
+                <h6 class="color-fintra mt-10">Seleccione medio de pago</h6>
                 <div class="mx-3">
                     <mat-accordion>
                         <mat-expansion-panel hideToggle>
