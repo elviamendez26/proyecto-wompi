@@ -27,8 +27,8 @@ export class GridPagosComponent implements OnInit {
   numeroSolicitud: any;
   nombreCliente: any;
   TipoIdentificacion: string;
-  sumTotal:number=0;
-panelOpenState = false;
+  sumTotal: number = 0;
+  panelOpenState = false;
 
   constructor(
     public _fintraBuscadoService: FintraBuscadoService,
@@ -38,16 +38,17 @@ panelOpenState = false;
   ) {
     this.formularioPagos = this.fb.group({
       tipo: ['CC', [Validators.required]],
-      numeroDoc: ['901217835', [Validators.required, Validators.minLength(5)]],
+      numeroDoc: ['1108453815', [Validators.required, Validators.minLength(5)]],
     });
-    this.formularioFactura= this.fb.group({
-      total: [0, [Validators.required,Validators.min(1) ]],
-     
+    this.formularioFactura = this.fb.group({
+      total: [0, [Validators.required, Validators.min(1)]],
+
     });
   }
 
   ngOnInit(): void {
     this.inicioSecion();
+    this.configuracion();
   }
   inicioSecion() {
     Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
@@ -62,7 +63,6 @@ panelOpenState = false;
     this._fintraBuscadoService.configuracionPasarela().subscribe((res) => {
       console.log(res.data)
       this.configuracionPasarela = res.data;
-      this.paso = 3;
       Swal.close();
     });
   }
@@ -72,19 +72,27 @@ panelOpenState = false;
     let data = this.formularioPagos.value
     Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
     this._fintraBuscadoService.getData(data.numeroDoc).subscribe((res) => {
+      Swal.close();
+      if (res.data.length == 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: '¡No tienes facturas pendientes!',
+        })
+        return
+      }
       this.paso = 2;
       this.datoPagar = [];
       res.data.forEach((dato: any, index) => {
         this.datoPagar.push({ ...dato, check: false })
       })
-      this.sumTotal=0;
-     
+      this.sumTotal = 0;
+
       this.numeroSolicitud = this.datoPagar[0].numeroSolicitud;
       this.identificacion = data.numeroDoc;
       this.TipoIdentificacion = data.tipo == 'CC' ? 'Cedula' : 'NIT';
       this.nombreCliente = this.datoPagar[0].nombreCliente;
 
-      Swal.close();
     });
   }
 
@@ -97,13 +105,18 @@ panelOpenState = false;
       }
       Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
       this._fintraBuscadoService.referenciaPago(data).subscribe((res) => {
+        Swal.close()
         console.log(res.data)
         this.dataReferencia = res.data;
-        
-        this.configuracion();
-
-        Swal.close();
+        this.pagar();
       });
+    }else{
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: '¡Tiene que Selecionar almenos una factura!',
+      })
+      
     }
   }
   almacenarDato(dato, evento) {
@@ -112,12 +125,12 @@ panelOpenState = false;
       this.details.push({
         documentoCxc: dato.documentoCxC
       })
-      this.sumTotal+=dato.valorFactura;
+      this.sumTotal += dato.valorFactura;
     } else {
       let array = this.details.filter(word => word.documentoCxc == dato.documentoCxC);
       let index = this.details.indexOf(array[0])
       this.details.splice(index, 1)
-      this.sumTotal-=dato.valorFactura;
+      this.sumTotal -= dato.valorFactura;
 
     }
     // this.formularioFactura['total'].setValue(this.sumTotal)
@@ -127,11 +140,13 @@ panelOpenState = false;
   }
 
   pagar() {
+
+    
     switch (this.metodoPago) {
       case 1:
         // this.mostrarPago='wompi';
         this.mostrarpago = false;
-        this.dataReferencia.valorFactura=this.dataReferencia.valorFactura==0?54000:this.dataReferencia.valorFactura;
+        this.dataReferencia.valorFactura = this.dataReferencia.valorFactura == 0 ? 54000 : this.dataReferencia.valorFactura;
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`);
         // this.ruta = `assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`
         break;

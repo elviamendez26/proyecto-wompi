@@ -1,3 +1,18 @@
+*{
+  line-height :normal !important
+}
+
+
+.fondo {
+  background: #f6f6f6;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  display: inline-block;
+  overflow-x: hidden;
+}
+
 .fondo-fintra {
   background-color: #4bbbed;
 }
@@ -6,19 +21,23 @@
   color: #4bbbed;
 }
 
+.border-fintra {
+  border:2px solid #4bbbed;
+}
+
 h2 {
   font-size: 2em;
-  text-align: center;
+  text-align: start;
   margin-top: 1em;
 }
-.m-0{
+.m-0 {
   margin: 0 !important;
   padding: 0 !important;
 }
 @media (min-width: 912px) {
   h2 {
-    font-size: 4em;
-    text-align: start;
+    font-size: 2em;
+    text-align: center;
     margin-top: 1em;
     margin-left: 1em;
   }
@@ -42,7 +61,7 @@ h2 {
 
 .subtitule {
   color: rgba(0, 0, 0, 0.54);
-  font-size: 14px;
+  font-size: 20px;
   margin-bottom: 16px;
 }
 
@@ -52,25 +71,24 @@ h2 {
   margin-bottom: 16px;
 }
 
-.link{
+.link {
   color: #00c3fd;
   text-decoration: underline;
-  cursor:pointer
+  cursor: pointer;
 }
 
-.texto{
+.texto {
   margin-left: 3em;
   border-left: 1px solid #fea950;
-  padding-left: 7px; 
+  padding-left: 7px;
 }
-.icono{
+.icono {
   position: absolute;
   top: 8px;
 }
-.total{
+.total {
   width: 30%;
   position: relative;
-  
 }
 .imagenDerecha {
   width: inherit;
@@ -86,39 +104,59 @@ h2 {
   }
 }
 
-
-
 @media (min-width: 1500px) {
-  .izquierda{
+  .izquierda {
     margin-left: 21em;
   }
 }
 
-
 .example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
   background-size: cover;
-} 
+}
 .mat-form-field + .mat-form-field {
   margin-left: 8px;
 }
 
 .espacioImagenDerecha {
   height: 100vh;
-  
+
   justify-content: center;
   align-items: center;
 }
 
-h6{
-  text-align: center;
+.datopago{
   font-size: 15px;
 }
-
+h6 {
+  text-align: start;
+  font-size: 18px;
+  margin: 10px;
+}
+.espacio-table {
+  overflow: auto;
+  width: 100vw;
+  padding: 0em 1em;
+}
 // animacion
 .bounce-top {
   -webkit-animation: bounce-top 10s infinite both;
   animation: bounce-top 10s infinite both;
+}
+
+.volver {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.mt-10 {
+  margin-top: 2.5rem !important;
 }
 
 /* ----------------------------------------------
