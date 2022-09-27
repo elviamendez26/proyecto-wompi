@@ -18,6 +18,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background, .mat-checkbox-checked.mat-accent .mat-checkbox-background {
     background-color: #4ABBEC;
 }
+mat-panel-title.mat-expansion-panel-header-title {
+    color: #4ABBEC;
+}
 
 .mat-stepper-horizontal, .mat-stepper-vertical {
     background-color: #fff0;

@@ -2,8 +2,8 @@
     <ng-container [ngSwitch]="paso">
         <div class="flex w-full justify-center px-10">
             <mat-card class="md:w-30" *ngSwitchCase="1">
-                <h2 class="color-fintra">PAGUE SU FACTURA</h2>
-                <div class="">
+                <h2 class="color-fintra sinMargin">PAGUE SU FACTURA</h2>
+                <div class="mt-5">
                     <p class="subtitule">
                         Datos del titular
                     </p>
@@ -25,7 +25,7 @@
                             </mat-form-field>
                         </div>
                         <div>
-                            <p>
+                            <p class="termino">
                                 Al presionar BUSCAR esta aceptando los <a class="link">terminos y condiciones</a>
                             </p>
                         </div>
@@ -37,13 +37,6 @@
                 </form>
             </mat-card>
             <div class="px-10 mx-3 " *ngSwitchCase="2">
-                <div class="volver" (click)="paso=1">
-                    <span class="material-icons text-xs ml-3">
-                        chevron_left
-                    </span>
-                    <a class="mt-1"> REGRESAR</a>
-
-                </div>
                 <h6 class="color-fintra mt-10">LISTADO DE FACTURA</h6>
                 <div class="espacio-table">
                     <table class="shadow-2xl w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
@@ -56,11 +49,12 @@
                                     Número de factura
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Fecha vencimiento
-                                </th>
-                                <th scope="col" class="py-3 px-6">
                                     Pagar
                                 </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Fecha vencimiento
+                                </th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -74,13 +68,14 @@
                                 <td class="py-4 px-6">
                                     {{dato.numeroFactura}}
                                 </td>
-                                <td class="py-4 px-6">
-                                    {{dato.fechaVencimiento}}
-                                </td>
+                              
                                 <td class="py-4 px-6">
                                     ${{dato.valorFactura | number}}
                                 </td>
 
+                                <td class="py-4 px-6">
+                                    {{dato.fechaVencimiento}}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -97,7 +92,7 @@
                     <mat-accordion>
                         <mat-expansion-panel hideToggle>
                             <mat-expansion-panel-header>
-                                <mat-panel-title>
+                                <mat-panel-title >
                                     Pagos en linea
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
@@ -161,7 +156,7 @@
                         Al presionar PAGAR esta aceptando los <a class="link">terminos y condiciones</a>
                     </p>
                     <div class="mt-3 text-center ">
-                        <button  class="color-fintra border-fintra rounded-full px-10 py-2 m-4" >Volver</button>
+                        <button  class="color-fintra border-fintra rounded-full px-10 py-2 m-4" (click)="paso=1" >Cancelar</button>
                         <button  class="text-white fondo-fintra rounded-full px-10 py-2 m-4" [disabled]="formularioPagos.invalid" 
                             (click)="referenciaPago()">Pagar</button>
                     </div>
