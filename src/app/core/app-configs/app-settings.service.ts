@@ -22,7 +22,7 @@ export class AppSettingsService {
   public fintraSeach={
     url:{
       listadoFactura:EndPoints.urlBase("api-fintra/api/generic/qry/tk/factura-clientes-ultracem/"),
-      configuracionPasarela:EndPoints.urlBase("api-fintra/api/generic/qry/pasarelas-pagos"),
+      configuracionPasarela:EndPoints.urlBase("api-fintra/api/generic/qry/pasarelas-pagos/32"),
       referenciaPago:EndPoints.urlBase("api-fintra/api/generic/generar-referencia-pago-wompi"),
     }
   }

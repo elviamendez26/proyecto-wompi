@@ -140,8 +140,6 @@ export class GridPagosComponent implements OnInit {
   }
 
   pagar() {
-
-    
     switch (this.metodoPago) {
       case 1:
         // this.mostrarPago='wompi';
