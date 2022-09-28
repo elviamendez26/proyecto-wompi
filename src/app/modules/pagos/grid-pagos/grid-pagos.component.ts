@@ -101,7 +101,8 @@ export class GridPagosComponent implements OnInit {
       let data = {
         "numeroSolicitud": this.numeroSolicitud,
         "identificacion": this.identificacion,
-        "details": this.details
+        "details": this.details,
+        "idPasarela":this.metodoPago
       }
       Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
       this._fintraBuscadoService.referenciaPago(data).subscribe((res) => {
