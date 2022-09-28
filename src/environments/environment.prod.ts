@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  urlApi:'https://ultracem.ngrok.io/',
+  urlApi:'https://prometheus.fintra.co:8443/',
   userName: "APPWEB",
   password: "123456",
 };

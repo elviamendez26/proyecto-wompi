@@ -104,13 +104,19 @@
                                             <mat-card class="example-card">
                                                 <img class="imagenLogo" src="assets/{{item.entidad}}.png"
                                                     [alt]="item.entidad">
-                                                <mat-card-content>
-                                                    <p class="datopago">
-                                                        Costos <strong>${{item.valorTarifa | number}}</strong>
+                                                <mat-card-content *ngIf="sumTotal>0">
+                                                    <mat-card-subtitle class="text-center m-0">Valor total</mat-card-subtitle>
+                                                    <mat-card-title class="color-fintra">
+                                                        ${{(item.valorTarifa+sumTotal) | number}}
+                                                    </mat-card-title>
+                                                </mat-card-content>
+                                                <mat-card-content *ngIf="sumTotal==0">
+                                                    <p class="datopago text-xs-letra">
+                                                        Costos ${{item.valorTarifa | number}}
                                                         <br>
-                                                        valor min <strong>${{item.valorMinimo | number}}</strong>
+                                                        valor min ${{item.valorMinimo | number}}
                                                         <br>
-                                                        valor max <strong>${{item.valorMaximo | number}}</strong>
+                                                        valor max ${{item.valorMaximo | number}}
                                                     </p>
                                                 </mat-card-content>
                                             </mat-card>
@@ -144,7 +150,7 @@
                                                 <img class="imagenLogo" src="assets/{{item.entidad}}.png"
                                                     [alt]="item.entidad">
                                                 <mat-card-content>
-                                                    <p class="datopago">
+                                                    <p class="datopago text-xs-letra">
                                                         Costos ${{item.valorTarifa | number}}
                                                         <br>
                                                         valor min ${{item.valorMinimo | number}}
