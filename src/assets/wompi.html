@@ -40,8 +40,8 @@
                 currency: 'COP',
                 amountInCents: (parseFloat(data.valorFactura) * 100), //cobro definido
                 reference: data.numeroFactura,
-                // publicKey: 'pub_prod_cO09UJfaU2nPhm1WvcBb9MhFfIjdBv0y',
-                  publicKey: 'pub_test_ySV5X2nF1TOpkiPqVkFTkthoFnTkR0eW',
+                publicKey: 'pub_prod_cO09UJfaU2nPhm1WvcBb9MhFfIjdBv0y',
+                //   publicKey: 'pub_test_ySV5X2nF1TOpkiPqVkFTkthoFnTkR0eW',
             })
 
             checkout.open(function (result) {
