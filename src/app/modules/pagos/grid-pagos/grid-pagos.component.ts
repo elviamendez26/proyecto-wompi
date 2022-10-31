@@ -37,8 +37,8 @@ export class GridPagosComponent implements OnInit {
     private sanitizer: DomSanitizer
   ) {
     this.formularioPagos = this.fb.group({
-      tipo: ['CC', [Validators.required]],
-      numeroDoc: ['1108453815', [Validators.required, Validators.minLength(5)]],
+      tipo: ['', [Validators.required]],
+      numeroDoc: ['', [Validators.required, Validators.minLength(5)]],
     });
     this.formularioFactura = this.fb.group({
       total: [0, [Validators.required, Validators.min(1)]],
