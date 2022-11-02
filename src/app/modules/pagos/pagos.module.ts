@@ -17,7 +17,9 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { EventoComponent } from './evento/evento.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,10 @@ import { EventoComponent } from './evento/evento.component';
     MatRadioModule,
     MatStepperModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatListModule
+
   ],
   providers: [],
   bootstrap: [GridPagosComponent]

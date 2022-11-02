@@ -186,6 +186,17 @@
                                     </ng-container>
                                 </mat-radio-group>
                             </div>
+                            <div class="mt-10">
+                                <p class="text-center termino">
+                                    Al presionar PAGAR esta aceptando los <a class="link">terminos y condiciones</a>
+                                </p>
+                                <div class="mt-3 text-center ">
+                                    <button class="color-fintra border-fintra rounded-full px-10 py-2 m-4"
+                                        (click)="paso=1">Cancelar</button>
+                                    <button class="text-white fondo-fintra rounded-full px-10 py-2 m-4"
+                                        [disabled]="formularioPagos.invalid" (click)="referenciaPago()">Pagar</button>
+                                </div>
+                            </div>
                         </mat-expansion-panel>
                     </mat-accordion>
                 </div>

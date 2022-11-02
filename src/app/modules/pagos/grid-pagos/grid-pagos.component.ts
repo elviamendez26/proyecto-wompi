@@ -5,6 +5,8 @@ import { FintraBuscadoService } from 'app/core/services/fintraBuscado.service';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
+import { EventoComponent } from '../evento/evento.component';
 
 @Component({
   selector: 'app-grid-pagos',
@@ -34,7 +36,8 @@ export class GridPagosComponent implements OnInit {
     public _fintraBuscadoService: FintraBuscadoService,
     private _authService: AuthService,
     public fb: FormBuilder,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    public dialog: MatDialog
   ) {
     this.formularioPagos = this.fb.group({
       tipo: ['', [Validators.required]],
@@ -97,12 +100,20 @@ export class GridPagosComponent implements OnInit {
   }
 
   referenciaPago() {
+    if (!this.metodoPago) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: '¡Elige un metodo de pago!',
+      })
+      return;
+    }
     if (this.details.length > 0) {
       let data = {
         "numeroSolicitud": this.numeroSolicitud,
         "identificacion": this.identificacion,
         "details": this.details,
-        "idPasarela":this.metodoPago
+        "idPasarela": this.metodoPago
       }
       Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
       this._fintraBuscadoService.referenciaPago(data).subscribe((res) => {
@@ -111,13 +122,13 @@ export class GridPagosComponent implements OnInit {
         this.dataReferencia = res.data;
         this.pagar();
       });
-    }else{
+    } else {
       Swal.fire({
         icon: 'warning',
         title: 'Oops...',
         text: '¡Tiene que Selecionar almenos una factura!',
       })
-      
+
     }
   }
   almacenarDato(dato, evento) {
@@ -141,6 +152,14 @@ export class GridPagosComponent implements OnInit {
   }
 
   pagar() {
+    if (!this.metodoPago) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Oops...',
+        text: '¡Elige un metodo de pago!',
+      })
+      return;
+    }
     switch (this.metodoPago) {
       case 1:
         // this.mostrarPago='wompi';
@@ -148,6 +167,19 @@ export class GridPagosComponent implements OnInit {
         this.dataReferencia.valorFactura = this.dataReferencia.valorFactura == 0 ? 54000 : this.dataReferencia.valorFactura;
         this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`);
         // this.ruta = `assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`
+        break;
+      case 2:
+        // const dialogRef = this.dialog.open(EventoComponent);
+        const dialogRef = this.dialog.open(EventoComponent, {
+          width: "30em",
+          data: {
+            valorFactura:this.dataReferencia.valorFactura,
+            referenciaPago:this.dataReferencia.referenciaPago,
+            identificacion: this.identificacion},
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          this.paso=1;
+        });
         break;
 
       default:
