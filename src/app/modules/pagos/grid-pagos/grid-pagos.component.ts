@@ -160,12 +160,14 @@ export class GridPagosComponent implements OnInit {
       })
       return;
     }
+    debugger;
+
     switch (this.metodoPago) {
       case 1:
         // this.mostrarPago='wompi';
         this.mostrarpago = false;
         this.dataReferencia.valorFactura = this.dataReferencia.valorFactura == 0 ? 54000 : this.dataReferencia.valorFactura;
-        this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`);
+        this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}&codigoConvenio=${this.dataReferencia.codigoConvenio}`);
         // this.ruta = `assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`
         break;
       case 2:
