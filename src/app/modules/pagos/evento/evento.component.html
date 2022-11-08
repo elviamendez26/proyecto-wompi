@@ -1,7 +1,5 @@
 <h1 class="titulo color-fintra w-full text-center">
-    Presenta estos datos
-    <br>
-    al momento de pagar
+    Recuerda acercarte a cualquier punto físico y presentar estos datos al momento de pagar
 </h1>
 <hr>
 <mat-list role="list">
@@ -11,17 +9,17 @@
                 Cédula
             </h2>
             <h2 class="subtitulo">
-                {{data.identificacion}}
+                {{puntos(data.identificacion)}}
             </h2>
         </div>
     </mat-list-item>
-    <mat-list-item role="listitem">
+    <mat-list-item role="listitem" *ngIf="data.convenio!=''">
         <div class="flex flex-row justify-between w-full">
             <h2 class="subtitulo">
                 Convenio
             </h2>
             <h2 class="subtitulo">
-                {{data.codigoConvenio}}
+                {{data.convenio}}
             </h2>
         </div>
     </mat-list-item>
@@ -41,12 +39,11 @@
                 Valor factura
             </h2>
             <h2 class="subtitulo">
-                {{data.valorFactura | number}}
+                {{puntos(data.valorFactura)}}
             </h2>
         </div>
     </mat-list-item>
 </mat-list>
 <div class="text-center">
-    <button class="text-white fondo-fintra rounded-full px-10 py-2 m-4   mat-dialog-close">Finalizar</button>
-
+    <button class="text-white fondo-fintra rounded-full px-10 py-2 m-4" mat-dialog-close>Finalizar</button>
 </div>

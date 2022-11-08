@@ -56,7 +56,6 @@ export class GridPagosComponent implements OnInit {
   inicioSecion() {
     Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
     this._authService.postSession().subscribe((res) => {
-      console.log(res)
       Swal.close();
     });
   }
@@ -115,6 +114,8 @@ export class GridPagosComponent implements OnInit {
         "details": this.details,
         "idPasarela": this.metodoPago
       }
+      console.log(data)
+      debugger
       Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
       this._fintraBuscadoService.referenciaPago(data).subscribe((res) => {
         Swal.close()
@@ -160,7 +161,6 @@ export class GridPagosComponent implements OnInit {
       })
       return;
     }
-    debugger;
 
     switch (this.metodoPago) {
       case 1:
@@ -172,11 +172,14 @@ export class GridPagosComponent implements OnInit {
         break;
       case 2:
         // const dialogRef = this.dialog.open(EventoComponent);
+        console.log(this.dataReferencia)
         const dialogRef = this.dialog.open(EventoComponent, {
           width: "30em",
+          disableClose: true,
           data: {
             valorFactura:this.dataReferencia.valorFactura,
             referenciaPago:this.dataReferencia.referenciaPago,
+            convenio: this.dataReferencia.codigoConvenio,
             identificacion: this.identificacion},
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -194,8 +197,7 @@ export class GridPagosComponent implements OnInit {
     }
   }
 
-
-
-
-
+  puntos(numero){
+    return numero.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  }
 }

@@ -12,5 +12,10 @@ export class EventoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
+    console.log(this.data)
+  }
+
+  puntos(numero){
+    return numero.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
 } 
