@@ -170,7 +170,7 @@
                                                         <ng-container *ngIf="sumTotal==0">
                                                             <p class="datopago text-xs-letra" *ngIf="item.habilitado">
                                                                 Costos
-                                                                {{item.tipoCalculo=='VAL'?'$':''}}{{puntos(item.valorTarifa)}}{{item.tipoCalculo=='POR'?'%':''}}
+                                                                {{item.tipoCalculo=='VAL'?'$':''}}{{item.valorTarifa}}{{item.tipoCalculo=='POR'?'%':''}}
                                                                 <br>
                                                                 valor min ${{puntos(item.valorMinimo)}}
                                                                 <br>

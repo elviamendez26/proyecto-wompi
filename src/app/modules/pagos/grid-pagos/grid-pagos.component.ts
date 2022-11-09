@@ -51,21 +51,23 @@ export class GridPagosComponent implements OnInit {
 
   ngOnInit(): void {
     this.inicioSecion();
-    this.configuracion();
   }
   inicioSecion() {
     Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
     this._authService.postSession().subscribe((res) => {
       Swal.close();
+      if (res) {
+        this.configuracion();
+      }
     });
   }
 
   configuracion() {
-    Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
+    // Swal.fire({ title: 'Cargando', html: 'Buscando información...', timer: 500000, didOpen: () => { Swal.showLoading() }, }).then((result) => { });
     this._fintraBuscadoService.configuracionPasarela().subscribe((res) => {
       console.log(res.data)
       this.configuracionPasarela = res.data;
-      Swal.close();
+      // Swal.close();
     });
   }
 
@@ -127,7 +129,7 @@ export class GridPagosComponent implements OnInit {
       Swal.fire({
         icon: 'warning',
         title: 'Oops...',
-        text: '¡Tiene que Selecionar almenos una factura!',
+        text: '¡Tiene que seleccionar al menos una factura!',
       })
 
     }
