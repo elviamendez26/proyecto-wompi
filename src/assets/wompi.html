@@ -16,9 +16,40 @@
     <title>Pagos FintraLogistics Ultracem</title>
 
     <style>
-        /* body {
-      background-color: cornflowerblue;
-    } */
+        .fila {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 5em;
+        }
+
+        .fila-btn {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        img {
+            width: 50%;
+        }
+
+        button {
+            color: white;
+            width: 10em;
+            height: 3em;
+            background-color: #4bbbed;
+            border-color: #4bbbed;
+            border-radius: 9999px;
+            border-style: hidden;
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            box-shadow: none;
+            cursor: pointer;
+        }
 
         table thead {
             background: #00B5D8 !important;
@@ -28,14 +59,15 @@
 </head>
 
 <body>
-
-
-
+    <div class="fila">
+        <img src="../refresh.png">
+    </div>
+    <div class="fila-btn">
+        <button onclick="location.href='/'">Recargar</button>
+    </div>
 
     <script>
         function pagoWompi(data) {
-            // debugger
-            // console.log(data)
             var checkout = new WidgetCheckout({
                 currency: 'COP',
                 amountInCents: (parseFloat(data.valorFactura) * 100), //cobro definido
@@ -45,7 +77,6 @@
             })
 
             checkout.open(function (result) {
-                debugger;
                 var transaction = result.transaction
                 console.log(result)
               
