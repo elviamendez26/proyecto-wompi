@@ -43,6 +43,26 @@
             </h2>
         </div>
     </mat-list-item>
+    <mat-list-item role="listitem">
+        <div class="flex flex-row justify-between w-full">
+            <h2 class="subtitulo">
+                Valor comisión
+            </h2>
+            <h2 class="subtitulo">
+                $ {{puntos(data.valorComision)}}
+            </h2>
+        </div>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+        <div class="flex flex-row justify-between w-full">
+            <h2 class="subtitulo">
+                Valor total a pagar
+            </h2>
+            <h2 class="subtitulo">
+                $ {{puntos(data.totalFactura)}}
+            </h2>
+        </div>
+    </mat-list-item>
 </mat-list>
 <div class="text-center">
     <button class="text-white fondo-fintra rounded-full px-10 py-2 m-4" mat-dialog-close>Finalizar</button>
