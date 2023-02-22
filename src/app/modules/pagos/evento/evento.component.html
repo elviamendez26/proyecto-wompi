@@ -1,0 +1,69 @@
+<h1 class="titulo color-fintra w-full text-center">
+    Recuerda acercarte a cualquier punto físico y presentar estos datos al momento de pagar
+</h1>
+<hr>
+<mat-list role="list">
+    <mat-list-item role="listitem">
+        <div class="flex flex-row justify-between w-full">
+            <h2 class="subtitulo">
+                Cédula
+            </h2>
+            <h2 class="subtitulo">
+                {{puntos(data.identificacion)}}
+            </h2>
+        </div>
+    </mat-list-item>
+    <mat-list-item role="listitem" *ngIf="data.convenio!=''">
+        <div class="flex flex-row justify-between w-full">
+            <h2 class="subtitulo">
+                Convenio
+            </h2>
+            <h2 class="subtitulo">
+                {{data.convenio}}
+            </h2>
+        </div>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+        <div class="flex flex-row justify-between w-full">
+            <h2 class="subtitulo">
+                Ref. Pago
+            </h2>
+            <h2 class="subtitulo">
+                {{data.referenciaPago}}
+            </h2>
+        </div>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+        <div class="flex flex-row justify-between w-full">
+            <h2 class="subtitulo">
+                Valor factura
+            </h2>
+            <h2 class="subtitulo">
+                $ {{puntos(data.valorFactura)}}
+            </h2>
+        </div>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+        <div class="flex flex-row justify-between w-full">
+            <h2 class="subtitulo">
+                Valor comisión
+            </h2>
+            <h2 class="subtitulo">
+                $ {{puntos(data.valorComision)}}
+            </h2>
+        </div>
+    </mat-list-item>
+    <mat-list-item role="listitem">
+        <div class="flex flex-row justify-between w-full">
+            <h2 class="subtitulo">
+                Valor total a pagar
+            </h2>
+            <h2 class="subtitulo">
+                $ {{puntos(data.totalFactura)}}
+            </h2>
+        </div>
+    </mat-list-item>
+</mat-list>
+<div class="text-center">
+    <button class="text-white fondo-fintra rounded-full px-10 py-2 m-4" mat-dialog-close>Finalizar</button>
+</div>
