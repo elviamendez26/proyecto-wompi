@@ -179,16 +179,56 @@ export class GridPagosComponent implements OnInit {
           width: "30em",
           disableClose: true,
           data: {
-            valorFactura:this.dataReferencia.valorFactura,
-            referenciaPago:this.dataReferencia.referenciaPago,
+            valorFactura: this.dataReferencia.valorFactura,
+            valorComision: this.dataReferencia.valorComision,
+            totalFactura: this.dataReferencia.totalFactura,
+            referenciaPago: this.dataReferencia.referenciaPago,
             convenio: this.dataReferencia.codigoConvenio,
-            identificacion: this.identificacion},
+            identificacion: this.identificacion
+          },
         });
         dialogRef.afterClosed().subscribe(result => {
-          this.paso=1;
+          this.paso = 1;
         });
         break;
-
+      case 3:
+        // const dialogRef = this.dialog.open(EventoComponent);
+        console.log(this.dataReferencia)
+        const dialogRef2 = this.dialog.open(EventoComponent, {
+          width: "30em",
+          disableClose: true,
+          data: {
+            valorFactura: this.dataReferencia.valorFactura,
+            valorComision: this.dataReferencia.valorComision,
+            totalFactura: this.dataReferencia.totalFactura,
+            referenciaPago: this.dataReferencia.referenciaPago,
+            convenio: this.dataReferencia.codigoConvenio,
+            identificacion: this.identificacion
+          },
+        });
+        dialogRef2.afterClosed().subscribe(result => {
+          this.paso = 1;
+        });
+        break;
+      case 4:
+        // const dialogRef = this.dialog.open(EventoComponent);
+        console.log(this.dataReferencia)
+        const dialogRef3 = this.dialog.open(EventoComponent, {
+          width: "30em",
+          disableClose: true,
+          data: {
+            valorFactura: this.dataReferencia.valorFactura,
+            valorComision: this.dataReferencia.valorComision,
+            totalFactura: this.dataReferencia.totalFactura,
+            referenciaPago: this.dataReferencia.referenciaPago,
+            convenio: this.dataReferencia.codigoConvenio,
+            identificacion: this.identificacion
+          },
+        });
+        dialogRef3.afterClosed().subscribe(result => {
+          this.paso = 1;
+        });
+        break;
       default:
         Swal.fire({
           icon: 'warning',
@@ -199,7 +239,7 @@ export class GridPagosComponent implements OnInit {
     }
   }
 
-  puntos(numero){
+  puntos(numero) {
     return numero.toString().replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
 }
