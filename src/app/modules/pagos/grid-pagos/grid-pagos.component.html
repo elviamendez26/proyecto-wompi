@@ -5,7 +5,7 @@
                 <h2 class="color-fintra sinMargin">Pague su factura</h2>
                 <div class="mt-5">
                     <p class="subtitule tamanoDiferente">
-                        Datos del titular
+                        Información del titular
                     </p>
                 </div>
                 <form novalidate [formGroup]="formularioPagos">
@@ -26,7 +26,7 @@
                         </div>
                         <div>
                             <p class="termino">
-                                Al presionar BUSCAR esta aceptando los <a class="link">términos y condiciones</a>
+                                Al hacer click en BUSCAR esta aceptando los <a class="link">términos y condiciones</a>
                             </p>
                         </div>
                         <div class="flex w-full justify-end sm:justify-center">
@@ -37,7 +37,7 @@
                 </form>
             </mat-card>
             <div class="px-10 mx-3 " *ngSwitchCase="2">
-                <h6 class="color-fintra mt-10">Listado de factura</h6>
+                <h6 class="color-fintra mt-10">Listado de facturas</h6>
                 <div class="espacio-table">
                     <table class="shadow-2xl w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -46,10 +46,10 @@
 
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Número de factura
+                                   número de factura
                                 </th>
                                 <th scope="col" class="py-3 px-6">
-                                    Pagar
+                                    Valor a pagar
                                 </th>
                                 <th scope="col" class="py-3 px-6">
                                     Fecha vencimiento
@@ -86,13 +86,13 @@
                         <h1 class="color-fintra"> <strong>${{puntos(sumTotal)}}</strong></h1>
                     </div>
                 </mat-card>
-                <h6 class="color-fintra mt-10">Seleccione medio de pago</h6>
+                <h6 class="color-fintra mt-10">Seleccione el medio de pago</h6>
                 <div class="mx-3">
                     <mat-accordion>
                         <mat-expansion-panel >
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    Pagos en linea
+                                    Pagos con WOMPI
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <div class="flex gap-3">
@@ -127,7 +127,7 @@
                             </div>
                             <div class="mt-10">
                                 <p class="text-center termino">
-                                    Al presionar PAGAR esta aceptando los <a class="link">términos y condiciones</a>
+                                    Al hacer click en PAGAR esta aceptando los <a class="link">términos y condiciones</a>
                                 </p>
                                 <div class="mt-3 text-center ">
                                     <button class="color-fintra border-fintra rounded-full px-10 py-2 m-4"
@@ -140,7 +140,7 @@
                         <mat-expansion-panel  (opened)="panelOpenState = true" (closed)="panelOpenState = false;metodoPago==0">
                             <mat-expansion-panel-header>
                                 <mat-panel-title>
-                                    Pagos en efectivo con código
+                                    Pagos en efectivo con convenio
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <div class="flex gap-3">
@@ -186,7 +186,7 @@
                             </div>
                             <div class="mt-10">
                                 <p class="text-center termino">
-                                    Al presionar PAGAR esta aceptando los <a class="link">términos y condiciones</a>
+                                    Al hacer click en PAGAR esta aceptando los <a class="link">términos y condiciones</a>
                                 </p>
                                 <div class="mt-3 text-center ">
                                     <button class="color-fintra border-fintra rounded-full px-10 py-2 m-4"

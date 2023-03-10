@@ -80,7 +80,7 @@ export class GridPagosComponent implements OnInit {
       if (res.data.length == 0) {
         Swal.fire({
           icon: 'warning',
-          title: 'Oops...',
+          title: 'Lo sentimos...',
           text: '¡No tienes facturas pendientes!',
         })
         return
@@ -104,8 +104,8 @@ export class GridPagosComponent implements OnInit {
     if (!this.metodoPago) {
       Swal.fire({
         icon: 'warning',
-        title: 'Oops...',
-        text: '¡Elige un metodo de pago!',
+        title: 'Lo sentimos...',
+        text: '¡Elige al menos un metodo de pago!',
       })
       return;
     }
@@ -128,7 +128,7 @@ export class GridPagosComponent implements OnInit {
     } else {
       Swal.fire({
         icon: 'warning',
-        title: 'Oops...',
+        title: 'Lo sentimos...',
         text: '¡Tiene que seleccionar al menos una factura!',
       })
 
@@ -158,19 +158,22 @@ export class GridPagosComponent implements OnInit {
     if (!this.metodoPago) {
       Swal.fire({
         icon: 'warning',
-        title: 'Oops...',
-        text: '¡Elige un metodo de pago!',
+        title: 'Lo sentimos...',
+        text: '¡Debes eligir un metodo de pago!',
       })
       return;
     }
+    console.log(this.metodoPago);
 
     switch (this.metodoPago) {
+      
       case 1:
         // this.mostrarPago='wompi';
         this.mostrarpago = false;
-        this.dataReferencia.valorFactura = this.dataReferencia.valorFactura == 0 ? 54000 : this.dataReferencia.valorFactura;
+        this.dataReferencia.valorFactura = this.dataReferencia.valorFactura == 0 ? 54000 : this.dataReferencia.valorFactura + this.dataReferencia.valorComision;
         // this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(`assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}&codigoConvenio=${this.dataReferencia.codigoConvenio}`);
-        window.location.href = `assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}&codigoConvenio=${this.dataReferencia.codigoConvenio}`;
+        window.open(`assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}&codigoConvenio=${this.dataReferencia.codigoConvenio}`,'POPUP','scrollbars=no, resizable=no,status =no, location= no, toolbar=no, menunbar=no,width=600,height=300,letf=100,top=100');
+        window.location.reload(); 
         // console.log( this.safeSrc);
         // this.ruta = `assets/wompi.html/?numeroFactura=${this.dataReferencia.referenciaPago}&valorFactura=${this.dataReferencia.valorFactura}`
         break;
@@ -234,7 +237,7 @@ export class GridPagosComponent implements OnInit {
       default:
         Swal.fire({
           icon: 'warning',
-          title: 'Oops...',
+          title: 'Lo sentimos ...',
           text: '¡Este metodo aun no se ha configurado!',
         })
         break;
